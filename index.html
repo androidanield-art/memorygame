@@ -3,35 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liga dos Bravos - Jogo da Memória</title>
+    <title>BRAVUS LEAGUE</title>
+    
+    <!-- Base URL para funcionamento em subdiretório -->
+    <!-- <base href="/memorygame/"> -->
+
+    <!-- Meta Tags para Redes Sociais (SEO) -->
+    <meta name="description" content="BRAVUS LEAGUE - Desafie sua memória nesta missão épica com ranking global!">
+    <meta property="og:title" content="BRAVUS LEAGUE">
+    <meta property="og:description" content="Conquiste o topo do ranking mundial nesta missão épica!">
+    <meta property="og:image" content="assets/logo.png">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="brand">
-            <img src="assets/logo.png" alt="Liga dos Bravos" class="logo">
-            <h1>Jogo da Memória</h1>
-        </div>
-        
-        <div class="controls">
-            <div class="control-group">
-                <label for="pair-selector">Número de Heróis:</label>
+
+    <!-- Tela de Entrada -->
+    <div id="entry-screen" class="entry-screen">
+        <div class="entry-container">
+          <div class="entry-card main-card">
+            <img src="assets/logo.png" alt="Logo Liga dos Bravos" class="logo">
+            <h1 class="main-title">BRAVUS LEAGUE</h1>
+            <h2 class="sub-title" data-i18n="subtitle">jogo da memória</h2>
+            
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="nickname" data-i18n="label-nickname">Seu Nickname</label>
+                    <input type="text" id="nickname" data-i18n-placeholder="placeholder-nickname" autocomplete="off">
+                </div>
+                <div class="input-group country-group">
+                    <label for="country-selector" data-i18n="label-country">País</label>
+                    <select id="country-selector"></select>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="pair-selector" data-i18n="label-difficulty">Dificuldade</label>
                 <select id="pair-selector">
-                    <option value="4">4 Heróis</option>
-                    <option value="6">6 Heróis</option>
-                    <option value="8">8 Heróis</option>
-                    <option value="10" selected>10 Heróis</option>
+                    <option value="4" data-i18n="diff-4">4 Pares (Iniciante)</option>
+                    <option value="6" data-i18n="diff-6">6 Pares (Intermediário)</option>
+                    <option value="8" data-i18n="diff-8">8 Pares (Avançado)</option>
+                    <option value="10" selected data-i18n="diff-10">10 Pares (Mestre)</option>
                 </select>
             </div>
-        </div>
 
-        <div class="stats-container">
-            <p>Movimentos: <span id="move-counter">0</span></p>
-            <button id="reset-button">Reiniciar Desafio</button>
+            <button id="start-button" data-i18n="btn-start">Iniciar Desafio</button>
+          </div>
+
+          <div class="entry-card ranking-card">
+            <h3 data-i18n="home-ranking-title">🏆 Top Global</h3>
+            <div class="input-group">
+                <label data-i18n="label-difficulty">Dificuldade</label>
+                <select id="home-rank-selector">
+                    <option value="4" data-i18n="diff-4">4 Pares (Iniciante)</option>
+                    <option value="6" data-i18n="diff-6">6 Pares (Intermediário)</option>
+                    <option value="8" data-i18n="diff-8">8 Pares (Avançado)</option>
+                    <option value="10" selected data-i18n="diff-10">10 Pares (Mestre)</option>
+                </select>
+            </div>
+            <ul id="home-ranking-list" class="ranking-list-home"></ul>
+          </div>
+        </div>
+    </div>
+
+    <!-- Cabeçalho do Jogo (Aparece após o Start) -->
+    <header id="game-header" class="hidden">
+        <div class="controls">
+            <button id="back-button" class="back-btn" data-i18n="btn-back">Voltar</button>
+            <div class="stats-pill">
+                <span class="label" data-i18n="stats-moves">MOVIMENTOS</span>
+                <span id="move-counter" class="value">0</span>
+            </div>
+            <button id="reset-button" data-i18n="btn-restart">Reiniciar</button>
         </div>
     </header>
 
-    <main class="memory-game" id="game-board"></main>
+    <!-- Tabuleiro -->
+    <main id="game-board" class="memory-game"></main>
+
+    <!-- Modal de Vitória (Celebrativo) -->
+    <div id="victory-modal" class="victory-screen hidden">
+        <div class="victory-card">
+            <div class="victory-emoji">🏆</div>
+            <h2 data-i18n="victory-title">MISSÃO CUMPRIDA!</h2>
+            <p><span data-i18n="victory-msg">Incrível</span>, <span id="winner-name">Bravo</span>!</p>
+            <div class="final-stats">
+                <span class="label" data-i18n="victory-stats-label">VOCÊ PRECISOU DE</span>
+                <span id="final-moves" class="value">0</span>
+                <span class="label" data-i18n="stats-moves">MOVIMENTOS</span>
+            </div>
+            
+            <div class="ranking-section">
+                <h3 data-i18n="ranking-title">🏆 RANKING DOS BRAVOS</h3>
+                <ul id="ranking-list"></ul>
+            </div>
+
+            <button id="play-again-button" data-i18n="btn-play-again">JOGAR NOVAMENTE</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
