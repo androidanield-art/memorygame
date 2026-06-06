@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga dos Bravos - Jogo da Memória</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <img src="assets/logo.png" alt="Liga dos Bravos" class="logo">
+            <h1>Jogo da Memória</h1>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label for="pair-selector">Número de Heróis:</label>
+                <select id="pair-selector">
+                    <option value="4">4 Heróis</option>
+                    <option value="6">6 Heróis</option>
+                    <option value="8">8 Heróis</option>
+                    <option value="10" selected>10 Heróis</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <p>Movimentos: <span id="move-counter">0</span></p>
+            <button id="reset-button">Reiniciar Desafio</button>
+        </div>
+    </header>
+
+    <main class="memory-game" id="game-board"></main>
+
+    <script src="script.js"></script>
+</body>
+</html>
